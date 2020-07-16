@@ -33,6 +33,23 @@ Route::post('/disPrice', function (Illuminate\Http\Request $post) {
     return view('productDiscount',['product'=>$product, 'price'=>$price, 'percent' => $percent, 'disAmount'=>$disAmount, 'disPrice' => $disPrice]);
 });
 
+Route::get('/trans', function (Illuminate\Http\Request $post) {
+    $word = $post->word;
+    $trans=[
+        'hello' => "xin chào",
+        'cat'   => 'con mèo',
+        'dog'   => 'con chó',
+        'school'=> 'trường học'
+    ];
+    $dich='';
+    foreach ($trans as $key => $val){
+        if (strtolower($word)==$key){
+            $dich = $val;
+        break;
+        }
+    }
+    return view('translate',[ 'word' => $word, 'dich' => $dich]);
+});
 
 
 

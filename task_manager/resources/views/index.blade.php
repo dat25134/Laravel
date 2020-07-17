@@ -1,3 +1,13 @@
+<?php session_start();
+$array = [
+            ['Nguyễn Văn A','01234567890','email.test@mail.com'],
+            ['Nguyễn Văn B','01234567890','email.test@mail.com'],
+            ['Nguyễn Văn C','01234567890','email.test@mail.com'],
+            ['Nguyễn Văn D','01234567890','email.test@mail.com'],
+            ['Nguyễn Văn E','01234567890','email.test@mail.com'],
+            ['Nguyễn Văn F','01234567890','email.test@mail.com'],
+        ];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,52 +27,26 @@
   </tr>
   </thead>
   <tbody>
-  <tr>
-      <td>1</td>
-      <td>Nguyễn Văn A</td>
-      <td>01234567890</td>
-      <td>email.test@mail.com</td>
-      <td>
-<a href="#">Xem</a> | <a href="#">Sửa</a> | <a href="#">Xóa</a&
-      </td>
-  </tr>
-  <tr>
-      <td>2</td>
-      <td>Nguyễn Văn B</td>
-      <td>01234567890</td>
-      <td>email.test@mail.com</td>
-      <td>
-          <a href="#">Xem</a> | <a href="#">Sửa</a> | <a href="#">Xóa</a>
-      </td>
-  </tr>
-  <tr>
-      <td>3</td>
-      <td>Nguyễn Văn C</td>
-      <td>01234567890</td>
-      <td>email.test@mail.com</td>
-      <td>
-          <a href="#">Xem</a> | <a href="#">Sửa</a> | <a href="#">Xóa</a>
-      </td>
-  </tr>
-  <tr>
-      <td>4</td>
-      <td>Nguyễn Văn D</td>
-      <td>01234567890</td>
-      <td>email.test@mail.com</td>
-      <td>
-          <a href="#">Xem</a> | <a href="#">Sửa</a> | <a href="#">Xóa</a>
-      </td>
-  </tr>
-  <tr>
-      <td>5</td>
-      <td>Nguyễn Văn E</td>
-      <td>01234567890</td>
-      <td>email.test@mail.com</td>
-      <td>
-          <a href="#">Xem</a> | <a href="#">Sửa</a> | <a href="#">Xóa</a>
-      </td>
-  </tr>
+    <?php
+        if (isset($_SESSION['customer'])) {$array = $_SESSION['customer'];}
+        if (isset($delIndex)) {
+            unset($array[$delIndex]);
+        }
+    ?>
+
+      @foreach ($array as $key => $item)
+        <tr>
+            <td><?= $key+1?></td>
+            <td><?= $item[0]?></td>
+            <td><?= $item[1]?></td>
+            <td><?= $item[2]?></td>
+            <td>
+            <a href="/view/{{$key}}">Xem</a> | <a href="/edit/{{$key}}">Sửa</a> | <a href="/del/{{$key}}">Xóa</a>
+            </td>
+        </tr>
+      @endforeach
   </tbody>
 </table>
 </body>
 </html>
+<?php $_SESSION['customer'] = $array?>

@@ -16,3 +16,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
+
+Route::get('/view/{index}', function ($index) {
+    return view('viewCustomer',['index'=>$index]);
+});
+
+Route::get('/edit/{index}', function ($index) {
+return view('editCustomer',['index'=>$index]);
+});
+
+Route::get('/del/{delIndex}', function ($delIndex) {
+return view('index',['delIndex'=>$delIndex]);
+});

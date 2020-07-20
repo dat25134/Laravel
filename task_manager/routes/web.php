@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CodeGymController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,3 +29,7 @@ return view('editCustomer',['index'=>$index]);
 Route::get('/del/{delIndex}', function ($delIndex) {
 return view('index',['delIndex'=>$delIndex]);
 });
+
+Route::get('/view', 'TableController@view');
+Route::post('/view', 'TableController@store');
+Route::get('/codegym', 'CodeGymController@code');

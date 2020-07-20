@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CodeGymController;
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,21 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', 'CustomerController@index');
 
-Route::get('/view/{index}', function ($index) {
-    return view('viewCustomer',['index'=>$index]);
-});
+Route::get('/view/{index}', 'CustomerController@show');
 
-Route::get('/edit/{index}', function ($index) {
-return view('editCustomer',['index'=>$index]);
-});
+Route::get('/edit/{index}','CustomerController@edit');
 
-Route::get('/del/{delIndex}', function ($delIndex) {
-return view('index',['delIndex'=>$delIndex]);
-});
+Route::get('/del/{delIndex}','CustomerController@destroy');
 
 Route::get('/view', 'TableController@view');
 Route::post('/view', 'TableController@store');

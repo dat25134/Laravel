@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -7,18 +8,23 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>List Tasks</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <!-- CSS -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" />
 </head>
 <body>
+    @if (session('create-success'))
+        {!!session('create-success')!!}
+    @endif
 <div class="flex-center position-ref full-height">
     <div class="content">
         <div class="title m-b-md">
             Tasks List
         </div>
-
         @if(!isset($tasks))
     <h5 class="text-primary">Dữ liệu không tồn tại!</h5>
 @else
@@ -30,6 +36,7 @@
             <th scope="col">Content</th>
             <th scope="col">Created</th>
             <th scope="col">Due Date</th>
+            <th scope="col">Image</th>
         </tr>
         </thead>
         <tbody>
@@ -47,6 +54,9 @@
                     <td>{{ $task->content }}</td>
                     <td>{{ $task->created }}</td>
                     <td>{{ $task->due_date }}</td>
+                    <td>
+                        <img src="{{ asset('storage/images/' . $task->image) }}" alt="" style="width: 150px">
+                    </td>
                 </tr>
             @endforeach
         @endif
@@ -57,14 +67,11 @@
     </div>
 </div>
 <!-- Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
-</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+       {{-- @if (session('create-success')) --}}
+
+    {{-- @endif --}}
+
+    </body>
 </html>

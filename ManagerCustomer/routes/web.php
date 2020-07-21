@@ -16,10 +16,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/tasks', 'TaskController@index')->name('tasks.index');
+Route::get('/tasks/create', 'TaskController@create')->name('tasks.create');
+Route::post('/tasks', 'TaskController@store')->name('tasks.store');

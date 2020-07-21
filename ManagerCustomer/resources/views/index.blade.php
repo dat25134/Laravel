@@ -28,8 +28,8 @@
         @if(!isset($tasks))
     <h5 class="text-primary">Dữ liệu không tồn tại!</h5>
 @else
-    <table class="table table-bordered">
-        <thead>
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
             <th scope="col">Task title</th>

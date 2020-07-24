@@ -1,0 +1,8 @@
+.page ul {
+    padding-left: 400;
+}
+.new span{
+    display: block;
+    text-align: right;
+    color: gray;
+}

@@ -16,13 +16,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'blogs'], function () {
     Route::get('/','BlogController@index' )->name('blogs.index');
-    Route::get('/{id}','BlogController@show')->name('blogs.show');
+    Route::get('/{id}/show','BlogController@show')->name('blogs.show');
     Route::post('/logout','BlogController@logout');
     Route::post('/creatpost','BlogController@addPost');
+    Route::get('/search','BlogController@search')->name('blogs.search');
   });
-Route::get('/creatpost', function () {
-    return view('ckediter');
-});
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

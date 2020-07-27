@@ -10,7 +10,7 @@ use App\User;
 class BlogController extends Controller
 {
     public function index(){
-        $posts = Blog::paginate(5);
+        $posts = Blog::orderBy('id','desc')->paginate(5);
         $new = Blog::orderBy('id', 'desc')->limit(3)->get();
         return view('blogs.index',compact('posts','new'));
     }
@@ -33,5 +33,23 @@ class BlogController extends Controller
         $blog->user_id = $id;
         $blog->save();
         return redirect('/blogs');
+    }
+
+    public function search(Request $request)
+
+    {
+
+        $keyword = $request->input('keyword');
+        if (!$keyword) {
+
+            return redirect()->route('blogs.index');
+        }
+
+        $posts = Blog::where('title', 'LIKE', '%' . $keyword . '%')
+
+            ->paginate(5);
+            // dd($posts->total());
+        $countSearch = $posts->total();
+        return view('blogs.index', compact('posts','countSearch'));
     }
 }

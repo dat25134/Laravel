@@ -4,6 +4,7 @@
 
 @section('content')
 <div class="container-fluid mt-5">
+    {{-- <?php dd($post) ?> --}}
     <h2>{{$post->title}}</h2>
     <div class="container">
         {!!$post->content!!}

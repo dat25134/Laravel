@@ -3,6 +3,11 @@
 @section('title', 'Home')
 
 @section('content')
+<div class="">
+    @if (isset($countSearch))
+<p> Tìm thấy {{$countSearch}} bài viết </p>
+    @endif
+</div>
 <div class="container mt-5">
     <div class="row">
         <div class="col-10">
@@ -20,7 +25,7 @@
                     @foreach ($posts as $item)
                     <tr>
                     <th scope="row">{{$item->id}}</th>
-                    <td><a href="/blogs/{{$item->id}}">{{$item->title}}</a></td>
+                    <td><a href="{{route('blogs.show',$item->id)}}">{{$item->title}}</a></td>
                         <td>{{$item->user->name}}</td>
                         <td>{{$item->created_at}}</td>
                     </tr>
@@ -28,9 +33,10 @@
                 </tbody>
             </table>
             <div class="page">
-                {{ $posts->links() }}
+                {{ $posts->appends(request()->query()) }}
             </div>
         </div>
+        @if (!isset($countSearch))
         <div class="col-2 new">
             <h2>New</h2>
             @foreach ($new as $item)
@@ -42,6 +48,7 @@
             <span> Đăng bởi {{$item->user->name}}</span> <br>
             @endforeach
         </div>
+        @endif
     </div>
 </div>
 @endsection

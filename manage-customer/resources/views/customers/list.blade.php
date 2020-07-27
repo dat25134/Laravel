@@ -22,7 +22,7 @@
                 <th></th>
           </tr>
           </thead>
-          <tbody>
+         <tbody>
           @if(count($customers) == 0)
           <tr><td colspan="4">Không có dữ liệu</td></tr>
           @else

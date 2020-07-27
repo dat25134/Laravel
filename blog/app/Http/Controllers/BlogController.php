@@ -52,4 +52,8 @@ class BlogController extends Controller
         $countSearch = $posts->total();
         return view('blogs.index', compact('posts','countSearch'));
     }
+
+    public function create(){
+        return view('ckediter');
+    }
 }

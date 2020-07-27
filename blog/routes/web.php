@@ -21,6 +21,8 @@ Route::group(['prefix' => 'blogs'], function () {
     Route::post('/creatpost','BlogController@addPost');
     Route::get('/search','BlogController@search')->name('blogs.search');
   });
+
+Route::get('/creatpost', 'BlogController@create')->name('blogs.create');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

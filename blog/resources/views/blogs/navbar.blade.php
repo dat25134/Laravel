@@ -33,7 +33,7 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/creatpost">Đăng bài</a>
+            <a class="nav-link" href="{{route('blogs.create')}}">Đăng bài</a>
             </li>
             @else
             <li class="nav-item">

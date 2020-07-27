@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -9,14 +8,14 @@ use Illuminate\Support\Facades\Storage;
 
 class TaskController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $tasks = Task::all();
+        $tasks = Task::paginate(20);
         return view('tasks.list', compact('tasks'));
     }
 

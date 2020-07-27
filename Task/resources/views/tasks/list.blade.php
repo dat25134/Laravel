@@ -30,10 +30,10 @@
           @else
                 @foreach($tasks as $key => $task)
                 <tr>
-                      <th scope="row">{{ $key+1 }}</th>
+                      <th scope="row">{{ $task->id }}</th>
                       <td>{{ $task->title }}</td>
                       <td>{{ $task->content }}</td>
-                      <td class="text-center"><img src="{{ asset('storage/'.$task->image) }}" alt="" class="rounded w-50 p-3 mx-auto"></td>
+                      <td class="text-center"><img src="{{ $task->image }}" alt="" class=""></td>
                       <td>{{ $task->created_at }}</td>
                       <td>{{ $task->updated_at }}</td>
                       <td><a href="{{ route('tasks.edit', $task->id) }}">sửa</a></td>
@@ -43,7 +43,11 @@
           @endif
           </tbody>
           </table>
-          <a class="btn btn-primary" href="{{ route('tasks.create') }}">Thêm mới</a>
+          <div class="d-flex">
+            <div class="mr-auto p-2"><a class="btn btn-primary" href="{{ route('tasks.create') }}">Thêm mới</a></div>
+            <div class="p-2"> {{ $tasks->appends(request()->query()) }}</div>
+          </div>
+
           </div>
       </div>
 @endsection

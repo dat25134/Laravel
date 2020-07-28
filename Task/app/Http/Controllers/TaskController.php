@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Http\Requests\TaskRequest;
 use App\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -35,7 +37,7 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TaskRequest $request)
     {
         $task = new Task();
         $task->title = $request->input('title');
@@ -44,6 +46,7 @@ class TaskController extends Controller
         //upload file
         if ($request->hasFile('image')) {
             $image = $request->file('image');
+
             $path = $image->store('images', 'public');
             $task->image = $path;
         }

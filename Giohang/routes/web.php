@@ -19,5 +19,4 @@ Route::get('/{id}','ProductController@show')->name('show');
 Route::get('/{id}/cart','ProductController@addcart')->name('addcart');
 Route::get('/{id}/delete','ProductController@delcart')->name('delete');
 Route::get('/showcart/alo','ProductController@displayCart')->name('showcart');
-
-
+Route::post('/sesion/aaaa/{id}','ProductController@Apicart');

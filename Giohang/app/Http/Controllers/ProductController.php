@@ -25,7 +25,7 @@ class ProductController extends Controller
             $cart = [$id,1];
             Session::push('cart',$cart);
         }else{
-            $data = Session::get('cart');
+            $data = session('cart');
             $check = true;
             foreach($data as $key => $product){
                 if ($product[0] == $id){
@@ -35,11 +35,8 @@ class ProductController extends Controller
                     break;
                 }
             }
-
-            // dd($data);
             if ($check) {
                 $cart = [$id,1];
-                // dd($cart);
                 Session::push('cart',$cart);
             }
         }
@@ -47,10 +44,21 @@ class ProductController extends Controller
         return redirect('/showcart/alo');
     }
 
+    public function Apicart(Request $request ,$id){
+            $data = session('cart');
+            foreach($data as $key => $product){
+                if ($product[0] == $id){
+                    $data[$key][1]=$request->sl;
+                    Session::put('cart',$data);
+                    break;
+                }
+            }
+            // return response()->json($data);
+    }
+
     public function delcart($id){
-        $data = Session::get('cart');
+        $data = session('cart');
         foreach($data as $key => $product){
-            // dd($product);
             if ($product[0] == $id){
                 unset($data[$key]);
                 Session::put('cart',$data);
@@ -62,11 +70,13 @@ class ProductController extends Controller
 
     public function displayCart(){
         $productsList =[];
-        foreach (Session::get('cart') as $item){
+        $total = 0;
+        foreach (session('cart') as $item){
             $product = Product::findOrFail($item[0]);
             $productsList[]=[$product,$item[1]];
+            $total+= $product->price*$item[1];
         }
         // request()->session()->flush();
-        return view('products.addcart',compact('productsList'));
+        return view('products.addcart',compact('productsList','total'));
     }
 }

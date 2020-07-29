@@ -23,7 +23,7 @@
                         <p class="card-text">Giá : <span
                                 style="font-size: 150%;font-weight:bold;color:rgb(146, 28, 28)">{{number_format($item[0]->price)." VNĐ"}}</span>
                         </p>
-                        <span>Số Lượng : </span><input type="number" value="{{$item[1]}}" style="width: 50px">
+                        <span>Số Lượng : </span><input type="number" id="{{$item[0]->id}}" name="{{$item[0]->id}}" onchange='updateSL({{$item[0]->id}})' value="{{$item[1]}}" style="width: 50px">
                         <div style="position: absolute; top:0;right:0 ; background-color: white">
                             <a href="{{route('delete',$item[0]->id)}}">
                                 <button type="button" class="close" aria-label="Close">
@@ -38,5 +38,23 @@
         @endforeach
     </tbody>
 </table>
+<script>
+    function updateSL(id){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        let sl = document.getElementById(id).value;
+        $.ajax({
+        type: "POST",
+        url: 'http://localhost:8000/sesion/aaaa/' + id,
+        data: { sl:sl}
+        }).done(function() {
+            $("#total").load(location.href + " #total");
+        });
+    }
+</script>
+<h3 id="total">Tổng cộng: {{ number_format($total)." VNĐ" }}</h3>
 <a href="{{ route('index')}}"> Quay lại trang chủ</a>
 @endsection

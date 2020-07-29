@@ -2,18 +2,18 @@
 @section('title', 'Chi tiết giỏ hàng')
 @section('content')
 <h2 class="text-center">Chi tiết giỏ hàng</h2>
-
 <table class="table">
     <thead>
         <tr>
             <th scope="col">#</th>
             <th scope="col">Mặt hàng</th>
+            <th scope="col"> Thành tiền</th>
         </tr>
     </thead>
     <tbody>
         @foreach ($productsList as $key=>$item)
-        <tr class="table-light">
-            <td class="d-flex justify-content-center">{{$key+1}}</td>
+        <tr class="table">
+            <td class="d-flex justify-content-center font-weight-bold" style="vertical-align: middle">{{$key+1}}</td>
             <td>
                 <div class="card p-2 rounded" style="width: 18rem;">
                     <img src="{{$item[0]->image}}" class="card-img-top" alt="{{$item[0]->name}}"
@@ -34,6 +34,9 @@
                     </div>
                 </div>
             </td>
+            <td style="vertical-align: middle">
+            <h2 style="font-weight:bold; color: rgb(131, 20, 20)" id="p{{$item[0]->id}}">{{number_format($item[0]->price*$item[1]) . " VNĐ"}}</h2>
+            </td>
         </tr>
         @endforeach
     </tbody>
@@ -50,8 +53,9 @@
         type: "POST",
         url: 'http://localhost:8000/sesion/aaaa/' + id,
         data: { sl:sl}
-        }).done(function() {
-            $("#total").load(location.href + " #total");
+        }).done(function(total) {
+            $("#total").text('Tổng cộng: ' + Number(total).toLocaleString('en') + " VNĐ");
+            $("#p"+id).load(" #p"+id);
         });
     }
 </script>

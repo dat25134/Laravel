@@ -1,4 +1,4 @@
-@extends('home')
+@extends('layouts.form')
 @section('title', 'Danh Sách sản phẩm')
 @section('content')
 <div class="container-fluid pt-5">
@@ -11,11 +11,11 @@
                 aria-haspopup="true" aria-expanded="false">
                 <div class="p-2 bd-highlight btn btn-primary" style="display:relative">Giỏ hàng <i
                         class="fa fa-shopping-cart btn btn-primary rounded-circle" aria-hidden="true"></i>
-                        <span id="cart" class="font-weight-bold" style="background: red; width:15px;height:15px; border-radius:50%;display:absolute; top:0;right:0">{{count(session('cart'))}}</span>
+                        <span id="cart" class="font-weight-bold" style="background: red; width:15px;height:15px; border-radius:50%;display:absolute; top:0;right:0">{{count($data)}}</span>
                 </div>
             </button>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                @if (count(session('cart'))>0)
+                @if (count($data)>0)
                 @foreach ($data as $item)
                 <div class="dropdown-item">
                     <div class="card mb-3" style="width: 300px;">
@@ -36,7 +36,7 @@
                 @endforeach
                 @else
                 <div class="dropdown-item">
-                    <p class="text-info">{{$data}}</p>
+                    <p class="text-info">Hiện không có sản phẩm</p>
                 </div>
                 @endif
                 <div class="dropdown-divider"></div>

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Product;
 use Illuminate\Http\Request;
 
@@ -101,10 +102,12 @@ class CartController extends Controller
     {
         $productsList = [];
         $total = 0;
-        foreach (session('cart') as $item) {
-            $product = Product::findOrFail($item[0]);
-            $productsList[] = [$product, $item[1]];
-            $total += $product->price * $item[1];
+        if (request()->session()->has('cart')){
+            foreach (session('cart') as $item) {
+                $product = Product::findOrFail($item[0]);
+                $productsList[] = [$product, $item[1]];
+                $total += $product->price * $item[1];
+            }
         }
         // request()->session()->flush();
         return view('products.addcart', compact('productsList', 'total'));

@@ -1,4 +1,4 @@
-@extends('home')
+@extends('layouts.form')
 @section('title', 'Chi tiết giỏ hàng')
 @section('content')
 <div class="card">

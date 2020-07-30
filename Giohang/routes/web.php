@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ProductController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,10 +14,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/','ProductController@index')->name('index');
-Route::get('/{id}','ProductController@show')->name('show');
-Route::get('/{id}/cart','CartController@addcart')->name('addcart');
-Route::post('/{id}/addcart','CartController@ApiAddcart')->name('APIaddcart');
-Route::post('/{id}/delete','CartController@APIdelcart')->name('APIdelete');
-Route::get('/showcart/alo','CartController@displayCart')->name('showcart');
-Route::post('/sesion/aaaa/{id}','CartController@Apicart');
+Route::get('/', function () {
+    return redirect('/products');
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => 'products'], function () {
+    Route::get('/', 'ProductController@index')->name('index');
+    Route::get('/{id}', 'ProductController@show')->name('show');
+    Route::get('/{id}/cart', 'CartController@addcart')->name('addcart');
+    Route::post('/{id}/addcart', 'CartController@ApiAddcart')->name('APIaddcart');
+    Route::post('/{id}/delete', 'CartController@APIdelcart')->name('APIdelete');
+    Route::get('/showcart/page', 'CartController@displayCart')->name('showcart');
+    Route::post('/sesion/page/{id}', 'CartController@Apicart');
+});

@@ -7,7 +7,7 @@ function updateSL(id){
     let sl = document.getElementById(id).value;
     $.ajax({
     type: "POST",
-    url: 'http://localhost:8000/sesion/aaaa/' + id,
+    url: 'http://localhost:8000/products/sesion/page/' + id,
     data: { sl:sl}
     }).done(function(data) {
         $("#total").text(Number(data[0]).toLocaleString('en') + " VNĐ");
@@ -24,7 +24,7 @@ function delCart(id){
     });
     $.ajax({
     type: "POST",
-    url: 'http://localhost:8000/'+ id +'/delete',
+    url: 'http://localhost:8000/products/'+ id +'/delete',
     }).done(function(message) {
         $("#listProdut").load(" #listProdut");
         toastr["success"](message, "Success");
@@ -39,7 +39,7 @@ function addcart(id){
     });
     $.ajax({
     type: "POST",
-    url: 'http://localhost:8000/'+id+'/addcart',
+    url: 'http://localhost:8000/products/'+id+'/addcart',
     }).done(function(message) {
         $("#loadagain").load(" #loadagain");
         $("#cart").load(" #cart");

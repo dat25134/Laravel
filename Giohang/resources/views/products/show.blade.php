@@ -1,4 +1,4 @@
-@extends('home')
+@extends('layouts.form')
 @section('title', 'Chi tiết sản phẩm')
 @section('content')
 <h2 class="text-center"> Chi tiết sản phẩm</h2>

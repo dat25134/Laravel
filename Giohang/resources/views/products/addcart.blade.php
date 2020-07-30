@@ -27,7 +27,7 @@
                                 <p class="card-text">Giá : <span
                                         style="font-size: 150%;font-weight:bold;color:rgb(146, 28, 28)">{{number_format($item[0]->price)." VNĐ"}}</span>
                                 </p>
-                                <span>Số Lượng : </span><input type="number" id="{{$item[0]->id}}" name="{{$item[0]->id}}" onchange='updateSL({{$item[0]->id}})' value="{{$item[1]}}" style="width: 50px">
+                                <span>Số Lượng : </span><input type="number" id="{{$item[0]->id}}" name="{{$item[0]->id}}" onchange='updateSL({{$item[0]->id}})' value="{{$item[1]}}" style="width: 50px" min='1'>
                                 <div style="position: absolute; top:0;right:0 ; background-color: white">
                                     {{-- <a href="{{route('delete',$item[0]->id)}}"> --}}
                                         <button onclick="delCart({{$item[0]->id}})" type="button" class="close" aria-label="Close">

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Product;
-use Illuminate\Support\Facades\Session;
+// use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -24,9 +24,9 @@ class ProductController extends Controller
 
     public function addcart($id)
     {
-        if (!Session::has('cart')) {
+        if (!request()->session()->has('cart')) {
             $cart = [$id, 1];
-            Session::push('cart', $cart);
+            request()->session()->push('cart', $cart);
         } else {
             $data = session('cart');
             $check = true;
@@ -34,17 +34,44 @@ class ProductController extends Controller
                 if ($product[0] == $id) {
                     $data[$key][1]++;
                     $check = false;
-                    Session::put('cart', $data);
+                    request()->session()->put('cart', $data);
                     break;
                 }
             }
             if ($check) {
                 $cart = [$id, 1];
-                Session::push('cart', $cart);
+                // Session::push('cart', $cart);
+                request()->session()->push('cart', $cart);
             }
         }
 
         return redirect('/showcart/alo');
+    }
+
+    public function ApiAddcart($id)
+    {
+        if (!request()->session()->has('cart')) {
+            $cart = [$id, 1];
+            request()->session()->push('cart', $cart);
+        } else {
+            $data = session('cart');
+            $check = true;
+            foreach ($data as $key => $product) {
+                if ($product[0] == $id) {
+                    $data[$key][1]++;
+                    $check = false;
+                    request()->session()->put('cart', $data);
+                    break;
+                }
+            }
+            if ($check) {
+                $cart = [$id, 1];
+                // Session::push('cart', $cart);
+                request()->session()->push('cart', $cart);
+            }
+        }
+        $message = "Thêm vào giỏ hàng thành công";
+        return response()->json($message);
     }
 
     public function Apicart(Request $request, $id)
@@ -54,16 +81,20 @@ class ProductController extends Controller
         foreach ($data as $key => $product) {
             if ($product[0] == $id) {
                 $data[$key][1] = $request->sl;
-                Session::put('cart', $data);
+                // Session::put('cart', $data);
+                request()->session()->put('cart', $data);
             }
         }
-        $productsList = [];
+        // $productsList = [];
         foreach (session('cart') as $item) {
+
             $product = Product::findOrFail($item[0]);
-            $productsList[] = [$product, $item[1]];
+            if ($item[0] == $id) {
+                $totalid = $product->price*$item[1];
+            }
             $total += $product->price * $item[1];
         }
-        return response()->json($total);
+        return response()->json([$total,$totalid]);
     }
 
     public function delcart($id)
@@ -72,7 +103,7 @@ class ProductController extends Controller
         foreach ($data as $key => $product) {
             if ($product[0] == $id) {
                 unset($data[$key]);
-                Session::put('cart', $data);
+                request()->session()->put('cart', $data);
                 break;
             }
         }

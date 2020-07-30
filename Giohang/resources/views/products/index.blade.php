@@ -26,7 +26,7 @@
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <h5 class="card-title">{{$item[0]->name}}</h5>
-                                    <p class="card-text">SL : <input type="number" id="{{$item[0]->id}}" name="{{$item[0]->id}}" onchange='updateSL({{$item[0]->id}})' value="{{$item[1]}}" style="width: 50px" min='1'></p>
+                                    <p class="card-text">SL : <input type="number" id="{{$item[0]->id}}" name="sl" onchange='updateSL({{$item[0]->id}})' value="{{$item[1]}}" style="width: 50px" min='1'></p>
                                 <p class="card-text"><small class="text-muted">Thành tiền : {{number_format($item[1]*$item[0]->price)." VNĐ"}}</small></p>
                                 </div>
                             </div>

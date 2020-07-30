@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -29,4 +30,17 @@ class ProductController extends Controller
 
         return view('products.show', compact('product'));
     }
+
+    public function dashboard()
+    {
+        if (Auth::user()){
+            return view('dashboard.index');
+        }else {
+            return redirect('/login');
+        }
+
+
+    }
+
+
 }

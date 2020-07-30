@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
 </head>
 <body>
+    @include('layouts.navbar')
 <div class="flex-center position-ref full-height">
     <div class="content">
         @yield('content')

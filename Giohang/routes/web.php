@@ -30,4 +30,5 @@ Route::group(['prefix' => 'products'], function () {
     Route::post('/{id}/delete', 'CartController@APIdelcart')->name('APIdelete');
     Route::get('/showcart/page', 'CartController@displayCart')->name('showcart');
     Route::post('/sesion/page/{id}', 'CartController@Apicart');
+    Route::get('/dashboard/index', 'ProductController@dashboard')->name('dashboard.index');
 });

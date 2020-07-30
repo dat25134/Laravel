@@ -9,8 +9,9 @@
         <div class="dropdown" id="loadagain">
             <button class="btn dropdown" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                <div class="p-2 bd-highlight btn btn-primary">Giỏ hàng <i
+                <div class="p-2 bd-highlight btn btn-primary" style="display:relative">Giỏ hàng <i
                         class="fa fa-shopping-cart btn btn-primary rounded-circle" aria-hidden="true"></i>
+                        <span id="cart" class="font-weight-bold" style="background: red; width:15px;height:15px; border-radius:50%;display:absolute; top:0;right:0">{{count(session('cart'))}}</span>
                 </div>
             </button>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">

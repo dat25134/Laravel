@@ -42,6 +42,7 @@ function addcart(id){
     url: 'http://localhost:8000/'+id+'/addcart',
     }).done(function(message) {
         $("#loadagain").load(" #loadagain");
+        $("#cart").load(" #cart");
         toastr.options = {
             "positionClass": "toast-bottom-right",
         };

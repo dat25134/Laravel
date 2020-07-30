@@ -11,6 +11,6 @@ $factory->define(Product::class, function (Faker $faker) {
         'name' => "Sản phẩm" . $faker->numberBetween(1000,9000),
         'description' => $faker->realText($maxNbChars = 50, $indexSize = 2),
         'price' => $faker->randomDigit*100000,
-        'image' =>$faker->imageUrl($width = 100, $height = 100)
+        'image' =>$faker->imageUrl($width = 300, $height = 300)
     ];
 });

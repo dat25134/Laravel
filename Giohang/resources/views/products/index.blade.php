@@ -4,7 +4,7 @@
 <div class="container-fluid pt-5">
     <div class="d-flex bd-highlight mb-3">
         <div class="mr-auto p-2 bd-highlight"><h2 class="text-center">DANH SÁCH SẢN PHẨM</h2></div>
-        <div class="p-2 bd-highlight"><a href="{{route('showcart')}}"> Xem chi tiết giỏ hàng</a></div>
+        <div class="p-2 bd-highlight"><a href="{{route('showcart')}}"> Xem chi tiết giỏ hàng <i class="fa fa-shopping-cart btn btn-primary rounded-circle" aria-hidden="true"></i></a></div>
       </div>
 
     <div class="container mt-5">

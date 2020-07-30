@@ -70,7 +70,8 @@ class ProductController extends Controller
                 request()->session()->push('cart', $cart);
             }
         }
-        $message = "Thêm vào giỏ hàng thành công";
+        $product = Product::findOrFail($id);
+        $message = "Thêm $product->name vào giỏ hàng thành công";
         return response()->json($message);
     }
 

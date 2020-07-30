@@ -6,7 +6,7 @@
         <h2 class="text-center">Chi tiết giỏ hàng</h2>
     </div>
     <div class="card-body">
-        <table class="table border">
+        <table class="table border" id="listProdut">
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -29,11 +29,11 @@
                                 </p>
                                 <span>Số Lượng : </span><input type="number" id="{{$item[0]->id}}" name="{{$item[0]->id}}" onchange='updateSL({{$item[0]->id}})' value="{{$item[1]}}" style="width: 50px">
                                 <div style="position: absolute; top:0;right:0 ; background-color: white">
-                                    <a href="{{route('delete',$item[0]->id)}}">
-                                        <button type="button" class="close" aria-label="Close">
+                                    {{-- <a href="{{route('delete',$item[0]->id)}}"> --}}
+                                        <button onclick="delCart({{$item[0]->id}})" type="button" class="close" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
-                                    </a>
+                                    {{-- </a> --}}
                                 </div>
                             </div>
                         </div>
@@ -66,6 +66,21 @@
         }).done(function(data) {
             $("#total").text(Number(data[0]).toLocaleString('en') + " VNĐ");
             $("#p"+id).text(Number(data[1]).toLocaleString('en') + " VNĐ");
+        });
+    }
+
+    function delCart(id){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+        type: "POST",
+        url: 'http://localhost:8000/'+ id +'/delete',
+        }).done(function(message) {
+            $("#listProdut").load(" #listProdut");
+            toastr["success"](message, "Success");
         });
     }
 </script>

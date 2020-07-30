@@ -98,7 +98,7 @@ class ProductController extends Controller
         return response()->json([$total,$totalid]);
     }
 
-    public function delcart($id)
+    public function APIdelcart($id)
     {
         $data = session('cart');
         foreach ($data as $key => $product) {
@@ -108,7 +108,9 @@ class ProductController extends Controller
                 break;
             }
         }
-        return redirect('/showcart/alo');
+        $product = Product::findOrFail($id);
+        $message = "Đã xóa $product->name ";
+        return response()->json($message);
     }
 
     public function displayCart()

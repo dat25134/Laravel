@@ -6,9 +6,7 @@
         <div class="mr-auto p-2 bd-highlight">
             <h2 class="text-center">DANH SÁCH SẢN PHẨM</h2>
         </div>
-
-
-        <div class="dropdown">
+        <div class="dropdown" id="loadagain">
             <button class="btn dropdown" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 <div class="p-2 bd-highlight btn btn-primary">Giỏ hàng <i
@@ -27,8 +25,8 @@
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <h5 class="card-title">{{$item[0]->name}}</h5>
-                                    <p class="card-text">SL :{{$item[1]}}</p>
-                                <p class="card-text"><small class="text-muted">Thành tiền : {{$item[1]*$item[0]->price}}</small></p>
+                                    <p class="card-text">SL : <input type="number" id="{{$item[0]->id}}" name="{{$item[0]->id}}" onchange='updateSL({{$item[0]->id}})' value="{{$item[1]}}" style="width: 50px"></p>
+                                <p class="card-text"><small class="text-muted">Thành tiền : {{number_format($item[1]*$item[0]->price)." VNĐ"}}</small></p>
                                 </div>
                             </div>
                         </div>
@@ -65,25 +63,6 @@
     </div>
 </div>
 </div>
-<script>
-    function addcart(id){
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-        type: "POST",
-        url: 'http://localhost:8000/'+id+'/addcart',
-        }).done(function(message) {
-            toastr.options = {
-                "positionClass": "toast-bottom-right",
-            };
-            toastr["success"](message, "Success");
-
-        });
-    }
-</script>
 {{-- dropdown menu --}}
 
 <script>
@@ -93,4 +72,7 @@
   $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
 });
 </script>
+@push('scripts')
+<script type="text/javascript" src="{{ asset('js/cart.js') }}"></script>
+@endpush
 @endsection

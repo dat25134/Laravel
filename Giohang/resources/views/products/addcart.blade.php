@@ -51,41 +51,12 @@
         </table>
     </div>
   </div>
-<script>
-    function updateSL(id){
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        let sl = document.getElementById(id).value;
-        $.ajax({
-        type: "POST",
-        url: 'http://localhost:8000/sesion/aaaa/' + id,
-        data: { sl:sl}
-        }).done(function(data) {
-            $("#total").text(Number(data[0]).toLocaleString('en') + " VNĐ");
-            $("#p"+id).text(Number(data[1]).toLocaleString('en') + " VNĐ");
-        });
-    }
-
-    function delCart(id){
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-        type: "POST",
-        url: 'http://localhost:8000/'+ id +'/delete',
-        }).done(function(message) {
-            $("#listProdut").load(" #listProdut");
-            toastr["success"](message, "Success");
-        });
-    }
-</script>
 <div class="container text-center">
     <a href="{{ route('index')}}" class="btn btn-info"> Quay lại trang chủ</a>
 </div>
+
+@push('scripts')
+<script type="text/javascript" src="{{ asset('js/cart.js') }}"></script>
+@endpush
 
 @endsection

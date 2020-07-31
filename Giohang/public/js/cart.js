@@ -1,10 +1,10 @@
-function updateSL(id){
+function updateSL(id,ele){
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    let sl = document.getElementById(id).value;
+    let sl =$(ele).val();
     $.ajax({
     type: "POST",
     url: 'http://localhost:8000/products/sesion/page/' + id,
@@ -28,6 +28,7 @@ function delCart(id){
     }).done(function(message) {
         $("#listProdut").load(" #listProdut");
         toastr["success"](message, "Success");
+        $("#loadagain").load(" #loadagain");
     });
 }
 

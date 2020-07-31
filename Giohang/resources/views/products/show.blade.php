@@ -1,7 +1,7 @@
 @extends('layouts.form')
 @section('title', 'Chi tiết sản phẩm')
 @section('content')
-<h2 class="text-center"> Chi tiết sản phẩm</h2>
+<h2 class="text-center" style="margin-top:135px"> Chi tiết sản phẩm</h2>
 <div class="d-flex bd-highlight mt-5">
     <div class="p-2 flex-fill bd-highlight col-3 pl-5">
         <div class="card" style="width: 18rem;">
@@ -16,7 +16,7 @@
                 </li>
             </ul>
             <div class="card-body text-center">
-            <a href="{{route('addcart',$product->id)}}" class="btn btn-warning">Mua ngay</a>
+            <a href="{{route('showcart')}}" class="btn btn-warning">Mua ngay</a>
             </div>
         </div>
     </div>

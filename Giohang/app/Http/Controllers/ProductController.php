@@ -11,39 +11,59 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
-        $data = [];
-        if (request()->session()->has('cart')){
-            if (count(session('cart'))>0){
-                foreach (session('cart') as $item) {
-                    $product = Product::findOrFail($item[0]);
-                    $data[] = [$product, $item[1]];
-                }
-            }
-        }
+        $products = Product::paginate(8);
+        $data = $this->getCart();
 
-        return view('products.index', compact('products','data'));
+        return view('products.index', compact('products', 'data'));
     }
 
     public function show($id)
     {
         $product = Product::findOrFail($id);
+        $data = $this->getCart();
 
-        return view('products.show', compact('product'));
+        return view('products.show', compact('product','data'));
     }
 
     public function dashboard()
     {
-        if (Auth::user()){
+        if (Auth::user()) {
             $products = Product::all();
-            return view('dashboard.index', compact('products'));
-        }else {
+            $data = $this->getCart();
+            return view('dashboard.index', compact('products','data'));
+        } else {
             return redirect('/login');
         }
-
-
     }
 
+    public function getCart(){
+        $data = [];
+        $trashed = Product::onlyTrashed()->get();
+        if (request()->session()->has('cart')) {
+            $cart = session('cart');
+            // dd(session('cart'));
+            // dd($cart);
+            if (count($cart) > 0) {
+                foreach ($cart as $key => $item) {
+                    foreach ($trashed as $val){
+                        if ($item[0] == $val->id){
+                            unset($cart[$key]);
+                        break;
+                        }
+                    }
+                }
+                // dd($cart);
+                request()->session()->put('cart', $cart);
+                foreach (session('cart') as $item){
+                    $product = Product::findOrFail($item[0]);
+                    if ($product->trashed()) dd('hello');
+                    $data[] = [$product, $item[1]];
+                }
+            }
+        }
+        // request()->session()->flush();
+        return $data;
+    }
     // public function apiList()
     // {
     //     $product = Product::all();
@@ -78,13 +98,15 @@ class ProductController extends Controller
     // }
 
     public function ListProduct()
-     {
+    {
         $products = Product::all();
-        return view('dashboard.managerProduct', compact('products'));
-     }
+        $data = $this->getCart();
 
-     public function create(CreateProductRequest $request)
-     {
+        return view('dashboard.managerProduct', compact('products','data'));
+    }
+
+    public function create(Request $request)
+    {
 
         $product = new Product;
         $product->name = $request->name;
@@ -92,21 +114,35 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->image = $request->image;
         $product->save();
-        $message = 'toastr.options = {"positionClass": "toast-bottom-right",};toastr["success"]("Thêm sản phẩm mới thành công", "Success");';
-        request()->session()->flash('success',$message);
+        // request()->session()->flash('success', $message);
 
-        return redirect('/products/dashboard/list');
-     }
+        return response()->json($product);
+    }
 
-     public function delete($id)
-     {
+    public function getProduct($id)
+    {
+
+        $product =Product::findOrFail($id);
+        // request()->session()->flash('success', $message);
+
+        return response()->json($product);
+    }
+
+    public function delete($id)
+    {
         $product = Product::findOrFail($id);
         $product->delete();
-        $products = Product::all();
-        $tbody = '';
         return response()->json("Đã xóa sản phẩm $product->name");
-     }
+    }
 
-
-
+    public function edit($id,Request $request)
+    {
+        $product = Product::findOrFail($id);
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->image = $request->image;
+        $product->save();
+        return response()->json($product);
+    }
 }

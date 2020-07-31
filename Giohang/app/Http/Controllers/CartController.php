@@ -101,6 +101,8 @@ class CartController extends Controller
     public function displayCart()
     {
         $productsList = [];
+        $product = new ProductController;
+        $data = $product->getCart();
         $total = 0;
         if (request()->session()->has('cart')){
             foreach (session('cart') as $item) {
@@ -110,6 +112,6 @@ class CartController extends Controller
             }
         }
         // request()->session()->flush();
-        return view('products.addcart', compact('productsList', 'total'));
+        return view('products.addcart', compact('productsList', 'total','data'));
     }
 }

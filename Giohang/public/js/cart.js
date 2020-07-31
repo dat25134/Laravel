@@ -51,3 +51,20 @@ function addcart(id){
 
     });
 }
+
+// function updateViewList(){
+//     $.ajaxSetup({
+//         headers: {
+//             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//         }
+//     });
+//     $.ajax({
+//     type: "POST",
+//     url: "/products/dashboard/list",
+//     }).done(function(data) {
+//         // $("#total").text(Number(data[0]).toLocaleString('en') + " VNĐ");
+//          document.getElementById('content').innerHTML = data;
+//         // $("#p"+id).text(Number(data[1]).toLocaleString('en') + " VNĐ");
+//         // $("#loadagain").load(" #loadagain");
+//     });
+// }

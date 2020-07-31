@@ -31,4 +31,7 @@ Route::group(['prefix' => 'products'], function () {
     Route::get('/showcart/page', 'CartController@displayCart')->name('showcart');
     Route::post('/sesion/page/{id}', 'CartController@Apicart');
     Route::get('/dashboard/index', 'ProductController@dashboard')->name('dashboard.index');
+    Route::get('/dashboard/list', 'ProductController@ListProduct')->name('dashboard.listProduct');
+    Route::post('/dashboard/create', 'ProductController@create')->name('dashboard.create');
+    Route::post('/dashboard/{id}/delete', 'ProductController@delete')->name('dashboard.delete');
 });

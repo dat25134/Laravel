@@ -16,7 +16,10 @@
                 </li>
             </ul>
             <div class="card-body text-center">
-            <a href="{{route('showcart')}}" class="btn btn-warning">Mua ngay</a>
+                <form action="{{route('addcart',$product->id)}}" method="get">
+                    <span class="card-title">SL :</span><input type="number" name="sl" id="sl" min="1" style="width:50px" value="1">
+                    <button type="submit" class="btn btn-warning">Mua ngay</button>
+                </form>
             </div>
         </div>
     </div>
@@ -28,7 +31,7 @@
             <li class="list-group-item">Service 3</li>
             <li class="list-group-item">Service 4</li>
             <li class="list-group-item">Service 5</li>
-          </ul>
+        </ul>
     </div>
 
 </div>

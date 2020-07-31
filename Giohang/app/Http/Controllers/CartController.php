@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    public function addcart($id)
+    public function addcart($id, Request $request)
     {
         if (!request()->session()->has('cart')) {
-            $cart = [$id, 1];
+            $cart = [$id, $request->sl];
             request()->session()->push('cart', $cart);
         } else {
             $data = session('cart');
@@ -24,13 +24,13 @@ class CartController extends Controller
                 }
             }
             if ($check) {
-                $cart = [$id, 1];
+                $cart = [$id, $request->sl];
                 // Session::push('cart', $cart);
                 request()->session()->push('cart', $cart);
             }
         }
 
-        return redirect('/showcart/alo');
+        return redirect('/products/showcart/page');
     }
 
     public function ApiAddcart($id)
@@ -95,6 +95,13 @@ class CartController extends Controller
         }
         $product = Product::findOrFail($id);
         $message = "Đã xóa $product->name ";
+        return response()->json($message);
+    }
+
+    public function delCartAll()
+    {
+        request()->session()->flush();
+        $message = 'Xóa thành công';
         return response()->json($message);
     }
 

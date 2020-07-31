@@ -36,4 +36,6 @@ Route::group(['prefix' => 'products'], function () {
     Route::post('/dashboard/{id}/delete', 'ProductController@delete')->name('dashboard.delete');
     Route::post('/dashboard/{id}/edit', 'ProductController@edit')->name('dashboard.edit');
     Route::post('/dashboard/{id}/get', 'ProductController@getProduct')->name('dashboard.get');
+    Route::post('/deleteCart/all', 'CartController@delCartAll')->name('deleteCart');
+
 });

@@ -4,7 +4,7 @@
 @include('layouts.sidebar')
 <div class="content-container">
     <div class="container-fluid" id="content">
-        <div class="dashboard">
+        <div class="dashboard" style="margin-top:100px">
             <div class="info">
                 <div class="group group1">
                     <div class="row1 row">
@@ -15,11 +15,11 @@
                         </div>
                     </div>
                     <div class="row2 row">
-                        <a href=""><i
+                        <a href="{{route('dashboard.listProduct')}}"><i
                                 class="fa fa-caret-right"></i> Xem chi tiết</a>
                     </div>
                 </div>
-                <div class="group group2">
+                {{-- <div class="group group2">
                     <div class="row1 row">
                         <i class="fa fa-user-circle-o fa-5x"></i>
                         <div class="nd">
@@ -57,7 +57,7 @@
                         <a href=""><i
                                 class="fa fa-caret-right"></i> Xem chi tiết</a>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

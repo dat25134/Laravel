@@ -101,10 +101,36 @@
                     </td>
                     <td class="text-center">
                         {{-- @include('layouts.modal') --}}
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#product" onclick="getProduct({{$item->id}})">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#product"
+                            onclick="getProduct({{$item->id}})">
                             Edit
                         </button>
-                        <button class="btn btn-danger ml-3" onclick="delProduct({{$item->id}})">Delete</button></td>
+                        <button class="btn btn-danger ml-3" data-toggle="modal"
+                            data-target="#deleteProduct{{$item->id}}">Delete</button></td>
+
+
+                    <div class="modal fade" id="deleteProduct{{$item->id}}" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Bạn có chắc chắn muốn xóa không!!!
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                    <button type="button" class="btn btn-primary" onclick="delProduct({{$item->id}})" data-dismiss="modal">Yes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </tr>
                 @endforeach
             </tbody>
@@ -142,8 +168,7 @@
                     <input type="text" class="form-control" id="idProduct" name="idProduct" readonly>
                 </div>
                 <div class="form-group">
-                    <label for="name" class="col-form-label">Tên sản phẩm <span
-                            class="text-danger">*</span> </label>
+                    <label for="name" class="col-form-label">Tên sản phẩm <span class="text-danger">*</span> </label>
                     <input type="text" class="form-control" id="nameProduct" name="nameProduct">
                 </div>
                 <div class="form-group">
@@ -167,7 +192,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="editProduct()" data-dismiss="modal">Áp dụng</button>
+                <button type="button" class="btn btn-primary" onclick="editProduct()" data-dismiss="modal">Áp
+                    dụng</button>
             </div>
         </div>
     </div>

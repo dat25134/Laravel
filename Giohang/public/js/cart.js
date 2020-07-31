@@ -16,7 +16,7 @@ function updateSL(id,ele){
     });
 }
 
-function delCart(id){
+function delCartItem(id){
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -25,6 +25,21 @@ function delCart(id){
     $.ajax({
     type: "POST",
     url: 'http://localhost:8000/products/'+ id +'/delete',
+    }).done(function(message) {
+        $("#listProdut").load(" #listProdut");
+        toastr["success"](message, "Success");
+        $("#loadagain").load(" #loadagain");
+    });
+}
+function delCart(){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+    type: "POST",
+    url: 'http://localhost:8000/products/deleteCart/all',
     }).done(function(message) {
         $("#listProdut").load(" #listProdut");
         toastr["success"](message, "Success");
